@@ -4,13 +4,13 @@ import NotFoundPage from "./pages/NotFoundPage";
 import ProfilePage from "./pages/ProfilePage";
 
 const ROUTES = {
-  "/": MainPage(),
-  "/login": LoginPage(),
-  "/404": NotFoundPage(),
-  "/profile": ProfilePage(),
+  "/": MainPage,
+  "/login": LoginPage,
+  "/404": NotFoundPage,
+  "/profile": ProfilePage,
 };
 
-const mathPath = (path) => {
+const matchPath = (path) => {
   return Object.keys(ROUTES).find((el) => el === path);
 };
 
@@ -20,11 +20,17 @@ const userRoute = () => {
 
 const router = () => {
   if (window.location.hash) return;
-  const path = mathPath(window.location.pathname) ?? "/404";
-  window.history.pushState(null, null, path ?? path);
+  const path = matchPath(window.location.pathname) ?? "/404";
+  window.history.pushState(null, null, path);
 
-  const $app = document.querySelector("#root");
-  $app.innerHTML = ROUTES[path];
+  const pageClass = ROUTES[path];
+
+  if (pageClass) {
+    const $app = document.querySelector("#root");
+    $app.innerHTML = "";
+    const $page = new pageClass("#root");
+    $page.render();
+  }
 };
 
 const hashrouter = () => {};

@@ -1,7 +1,10 @@
+import Page from ".";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
-const ProfilePage = () => `
+class ProfilePage extends Page {
+  getHtml() {
+    return `
     <div class="bg-gray-100 min-h-screen flex justify-center">
       <div class="max-w-md w-full">
         ${Header()}
@@ -65,7 +68,7 @@ const ProfilePage = () => `
         </main>
         ${Footer()}
       </div>
-    </div>
-
-`;
+    </div>    `;
+  }
+}
 export default ProfilePage;

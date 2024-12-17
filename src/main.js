@@ -8,7 +8,7 @@ window.addEventListener("click", (e) => {
     e.preventDefault();
     const path = e.target.getAttribute("href");
     if (path !== "#") {
-      window.history.pushState({}, "", path);
+      window.history.pushState(null, "", path);
       router();
     } else {
       userRoute();
