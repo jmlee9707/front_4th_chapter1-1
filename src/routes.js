@@ -18,6 +18,11 @@ const userRoute = () => {
   console.log("");
 };
 
+const navigateTo = (path) => {
+  window.history.pushState(null, "", path);
+  router();
+};
+
 const router = () => {
   if (window.location.hash) return;
   const path = matchPath(window.location.pathname) ?? "/404";
@@ -35,4 +40,4 @@ const router = () => {
 
 const hashrouter = () => {};
 
-export { userRoute, router, hashrouter };
+export { userRoute, router, navigateTo, hashrouter };

@@ -4,7 +4,7 @@ class Page {
   }
   render() {
     this.parent.insertAdjacentHTML("beforeend", this.getHtml());
-    // this.addEventListeners();
+    this.addEventListeners();
   }
   getHtml() {
     return ``;

@@ -1,4 +1,5 @@
-import { router, userRoute } from "./routes";
+import { navigateTo, router, userRoute } from "./routes";
+import { clearUserStorage } from "./store/userStore";
 
 window.addEventListener("load", () => router());
 window.addEventListener("popstate", () => router());
@@ -8,9 +9,9 @@ window.addEventListener("click", (e) => {
     e.preventDefault();
     const path = e.target.getAttribute("href");
     if (path !== "#") {
-      window.history.pushState(null, "", path);
-      router();
+      navigateTo(path);
     } else {
+      clearUserStorage();
       userRoute();
     }
   }
