@@ -1,8 +1,39 @@
 import Page from ".";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import { getUserInfo, setUserStorage } from "../store/userStore";
 
 class ProfilePage extends Page {
+  getUserState() {
+    const userInfo = getUserInfo();
+    if (userInfo) {
+      document.getElementById("username").value =
+        userInfo.username ?? "testuser";
+      document.getElementById("email").value = userInfo.email;
+      document.getElementById("bio").value = userInfo.bio;
+    }
+  }
+
+  updateUserState() {
+    const name = document.getElementById("username").value;
+    const email = document.getElementById("email").value;
+    const bio = document.getElementById("bio").value;
+
+    setUserStorage({ username: name, email: email, bio: bio });
+  }
+
+  addEventListeners() {
+    this.getUserState();
+
+    const $profileForm = document.getElementById("profile-form");
+    $profileForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if ($profileForm.textContent) {
+        this.updateUserState();
+      }
+    });
+  }
+
   getHtml() {
     return `
     <div class="bg-gray-100 min-h-screen flex justify-center">
@@ -13,7 +44,7 @@ class ProfilePage extends Page {
             <h2 class="text-2xl font-bold text-center text-blue-600 mb-8">
               내 프로필
             </h2>
-            <form>
+            <form id = "profile-form">
               <div class="mb-4">
                 <label
                   for="username"
@@ -60,9 +91,7 @@ class ProfilePage extends Page {
               <button
                 type="submit"
                 class="w-full bg-blue-600 text-white p-2 rounded font-bold"
-              >
-                프로필 업데이트
-              </button>
+              >프로필 업데이트</button>
             </form>
           </div>
         </main>

@@ -5,16 +5,16 @@ import { setUserStorage } from "../store/userStore";
 class LoginPage extends Page {
   addEventListeners() {
     const $id = document.getElementById("username");
-    const $submitButton = document.querySelector("button");
+    const $loginForm = document.getElementById("login-form");
 
-    $submitButton.addEventListener("click", (e) => {
+    $loginForm.addEventListener("submit", (e) => {
       e.preventDefault();
       if ($id.value) {
-        const userInfo = { username: "testuser", email: $id.value, bio: "" };
+        const userInfo = { username: "testuser", email: "", bio: "" };
         setUserStorage(userInfo);
         navigateTo("/");
       } else {
-        alert("id를 입력해주세요");
+        alert("id를 입력해주세요")``;
       }
     });
   }

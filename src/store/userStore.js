@@ -1,5 +1,6 @@
 function setUserStorage(userInfo) {
-  window.localStorage.setItem("user", userInfo);
+  window.localStorage.clear();
+  window.localStorage.setItem("user", JSON.stringify(userInfo));
 }
 
 function clearUserStorage() {
@@ -7,9 +8,17 @@ function clearUserStorage() {
 }
 
 function checkLoginState() {
-  console.log("dd");
-  console.log(window.localStorage.getItem("user"));
   return window.localStorage.getItem("user") ? true : false;
 }
 
-export { setUserStorage, clearUserStorage, checkLoginState };
+function getUserInfo() {
+  const info = JSON.parse(window.localStorage.getItem("user")) ?? null;
+
+  return {
+    username: info.username,
+    email: info.email,
+    bio: info.bio,
+  };
+}
+
+export { setUserStorage, clearUserStorage, checkLoginState, getUserInfo };

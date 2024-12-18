@@ -19,7 +19,7 @@ const Header = () => {
         <ul class="flex justify-around">
           <li><a href="/" class="${textColor("/")}">홈</a></li>
           <li><a href="/profile" class="${textColor("/profile")}">프로필</a></li>
-          ${isLogin() ? `<li><a href="#" class=${textColor("/#")}>로그아웃</a></li>` : ""}
+          ${isLogin() ? `<li><button id = "logout" type="button" class=${textColor("/#")}>로그아웃</button></li>` : ""}
         </ul>
       </nav>
     `;
