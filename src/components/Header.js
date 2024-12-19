@@ -4,11 +4,11 @@ const Header = () => {
   const currentPath = window.location.pathname;
 
   const textColor = (path) => {
-    return path === currentPath ? "text-blue-600" : "text-gray-600";
+    return path === currentPath ? "text-blue-600 font-bold" : "text-gray-600";
   };
 
   const isLogin = () => {
-    return userStore.login;
+    return userStore.checkLoginState();
   };
 
   return `
@@ -18,7 +18,7 @@ const Header = () => {
       <nav class="bg-white shadow-md p-2 sticky top-14">
         <ul class="flex justify-around">
           <li><a href="/" class="${textColor("/")}">홈</a></li>
-          <li><a href="/profile" class="${textColor("/profile")}">프로필</a></li>
+          ${isLogin() ? `<li><a href="/profile" class="${textColor("/profile")}">프로필</a></li>` : `<li><a href="/login" class="${textColor("/profile")}">로그인</a></li>`}
           ${isLogin() ? `<li><button id = "logout" type="button" class="text-gray-600">로그아웃</button></li>` : ""}
         </ul>
       </nav>
