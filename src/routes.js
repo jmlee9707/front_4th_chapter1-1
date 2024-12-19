@@ -81,7 +81,6 @@ class Router {
   }
 
   initRoute() {
-    // 초기화 및 이벤트 설정
     this.router();
 
     window.addEventListener("popstate", () => {
@@ -92,15 +91,13 @@ class Router {
       this.router();
     });
 
-    // button, navbar 이동 처리
     window.addEventListener("click", (e) => {
-      if (e.target.id === "logout") {
+      if (e.target.tagName === "A" && e.target.getAttribute("href")) {
         e.preventDefault();
-        userStore.clearUserState();
-        this.navigateTo("/");
-      } else if (e.target.tagName === "A" && e.target.getAttribute("href")) {
-        e.preventDefault();
-        this.navigateTo(e.target.getAttribute("href"));
+        if (e.target.id === "logout") {
+          userStore.logout();
+          this.navigateTo("/login");
+        } else this.navigateTo(e.target.getAttribute("href"));
       }
     });
   }
