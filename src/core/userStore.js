@@ -27,6 +27,7 @@ class UserState {
       bio: info.bio ?? "",
     };
   }
+
   init() {
     const info = this.getUserInfo();
     if (window.localStorage.getItem("user")) {

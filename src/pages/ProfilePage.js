@@ -5,7 +5,7 @@ import userStore from "../core/userStore";
 
 class ProfilePage extends Page {
   getUserState() {
-    const userInfo = userStore.state;
+    const userInfo = userStore.getUserInfo();
 
     if (userInfo) {
       document.getElementById("username").value =
