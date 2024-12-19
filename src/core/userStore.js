@@ -8,9 +8,9 @@ class UserState {
     this.state = userInfo;
   }
 
-  clearUserState() {
-    window.localStorage.removeItem("user");
+  logout() {
     this.state = {};
+    window.localStorage.removeItem("user");
   }
 
   checkLoginState() {
@@ -32,7 +32,7 @@ class UserState {
     if (window.localStorage.getItem("user")) {
       this.setUserState(info);
     } else {
-      this.state = {}; // 초기 비로그인 상태
+      this.state = {};
     }
   }
 }
