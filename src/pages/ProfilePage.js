@@ -6,7 +6,6 @@ import userStore from "../core/userStore";
 class ProfilePage extends Page {
   getUserState() {
     const userInfo = userStore.state;
-    console.log(userInfo);
 
     if (userInfo) {
       document.getElementById("username").value =
@@ -57,7 +56,7 @@ class ProfilePage extends Page {
                   type="text"
                   id="username"
                   name="username"
-                  value="홍길동"
+                  value=""
                   class="w-full p-2 border rounded"
                 />
               </div>
@@ -71,7 +70,7 @@ class ProfilePage extends Page {
                   type="email"
                   id="email"
                   name="email"
-                  value="hong@example.com"
+                  value=""
                   class="w-full p-2 border rounded"
                 />
               </div>
@@ -86,8 +85,7 @@ class ProfilePage extends Page {
                   name="bio"
                   rows="4"
                   class="w-full p-2 border rounded"
-                >
-안녕하세요, 항해플러스에서 열심히 공부하고 있는 홍길동입니다.</textarea
+                ></textarea
                 >
               </div>
               <button
