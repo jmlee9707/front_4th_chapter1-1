@@ -1,11 +1,12 @@
 import Page from ".";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import { getUserInfo, setUserStorage } from "../store/userStore";
+import userStore from "../core/userStore";
 
 class ProfilePage extends Page {
   getUserState() {
-    const userInfo = getUserInfo();
+    const userInfo = userStore.state;
+
     if (userInfo) {
       document.getElementById("username").value =
         userInfo.username ?? "testuser";
@@ -19,7 +20,7 @@ class ProfilePage extends Page {
     const email = document.getElementById("email").value;
     const bio = document.getElementById("bio").value;
 
-    setUserStorage({ username: name, email: email, bio: bio });
+    userStore.setUserState({ username: name, email: email, bio: bio });
   }
 
   addEventListeners() {

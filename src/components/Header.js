@@ -1,4 +1,4 @@
-import { checkLoginState } from "../store/userStore";
+import userStore from "../core/userStore";
 
 const Header = () => {
   const currentPath = window.location.pathname;
@@ -8,7 +8,7 @@ const Header = () => {
   };
 
   const isLogin = () => {
-    return checkLoginState();
+    return userStore.login;
   };
 
   return `
@@ -19,7 +19,7 @@ const Header = () => {
         <ul class="flex justify-around">
           <li><a href="/" class="${textColor("/")}">홈</a></li>
           <li><a href="/profile" class="${textColor("/profile")}">프로필</a></li>
-          ${isLogin() ? `<li><button id = "logout" type="button" class=${textColor("/#")}>로그아웃</button></li>` : ""}
+          ${isLogin() ? `<li><button id = "logout" type="button" class="text-gray-600">로그아웃</button></li>` : ""}
         </ul>
       </nav>
     `;
