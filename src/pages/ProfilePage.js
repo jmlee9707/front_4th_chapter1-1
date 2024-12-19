@@ -6,12 +6,13 @@ import userStore from "../core/userStore";
 class ProfilePage extends Page {
   getUserState() {
     const userInfo = userStore.state;
+    console.log(userInfo);
 
     if (userInfo) {
       document.getElementById("username").value =
         userInfo.username ?? "testuser";
-      document.getElementById("email").value = userInfo.email;
-      document.getElementById("bio").value = userInfo.bio;
+      document.getElementById("email").value = userInfo.email ?? "";
+      document.getElementById("bio").value = userInfo.bio ?? "";
     }
   }
 

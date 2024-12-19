@@ -1,41 +1,43 @@
-const INIT_USER = {
-  username: "",
-  email: "",
-  bio: "",
-};
-
 class UserState {
   constructor() {
-    this.login = false;
-    this.state = INIT_USER;
+    this.state = {};
   }
 
   setUserState(userInfo) {
     window.localStorage.setItem("user", JSON.stringify(userInfo));
-    this.login = true;
     this.state = userInfo;
   }
 
   clearUserState() {
     window.localStorage.removeItem("user");
-    this.login = false;
-    this.state = INIT_USER;
+    this.state = {};
   }
 
   checkLoginState() {
-    return this.login;
+    return window.localStorage.getItem("user");
   }
 
   getUserInfo() {
-    const info = JSON.parse(window.localStorage.getItem("user")) ?? null;
+    const storedUser = window.localStorage.getItem("user");
+    const info = storedUser ? JSON.parse(storedUser) : {};
 
     return {
-      username: info.username,
-      email: info.email,
-      bio: info.bio,
+      username: info.username ?? "",
+      email: info.email ?? "",
+      bio: info.bio ?? "",
     };
+  }
+  init() {
+    const info = this.getUserInfo();
+    if (window.localStorage.getItem("user")) {
+      this.setUserState(info);
+    } else {
+      this.state = {}; // 초기 비로그인 상태
+    }
   }
 }
 
 const userStore = new UserState();
+userStore.init();
+
 export default userStore;

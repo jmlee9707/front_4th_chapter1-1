@@ -27,7 +27,6 @@ class Router {
     } else return window.location.pathname;
   }
 
-  // 1
   router() {
     const path = this.getPath();
     const currentPath = this.matchUrl(path);
@@ -95,13 +94,13 @@ class Router {
 
     // button, navbar 이동 처리
     window.addEventListener("click", (e) => {
-      if (e.target.tagName === "A" && e.target.getAttribute("href")) {
-        e.preventDefault();
-        this.navigateTo(e.target.getAttribute("href"));
-      } else if (e.target.id === "logout") {
+      if (e.target.id === "logout") {
         e.preventDefault();
         userStore.clearUserState();
         this.navigateTo("/");
+      } else if (e.target.tagName === "A" && e.target.getAttribute("href")) {
+        e.preventDefault();
+        this.navigateTo(e.target.getAttribute("href"));
       }
     });
   }
