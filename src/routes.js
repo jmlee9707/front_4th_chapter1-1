@@ -22,7 +22,6 @@ class Router {
 
   getPath() {
     if (window.location.hash) {
-      console.log(window.location.hash);
       return window.location.hash.replace("#", "");
     } else return window.location.pathname;
   }
