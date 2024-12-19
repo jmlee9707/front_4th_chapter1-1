@@ -14,31 +14,15 @@ class UserState {
   }
 
   checkLoginState() {
-    return window.localStorage.getItem("user");
+    return window.localStorage.getItem("user") ? true : false;
   }
 
   getUserInfo() {
     const storedUser = window.localStorage.getItem("user");
     const info = storedUser ? JSON.parse(storedUser) : {};
-
-    return {
-      username: info.username ?? "",
-      email: info.email ?? "",
-      bio: info.bio ?? "",
-    };
-  }
-
-  init() {
-    const info = this.getUserInfo();
-    if (window.localStorage.getItem("user")) {
-      this.setUserState(info);
-    } else {
-      this.state = {};
-    }
+    return info;
   }
 }
 
 const userStore = new UserState();
-userStore.init();
-
 export default userStore;
