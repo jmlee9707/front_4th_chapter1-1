@@ -1,6 +1,6 @@
 import Page from ".";
 import userStore from "../core/userStore";
-import { navigateTo } from "../routes";
+import router from "../routes";
 
 class LoginPage extends Page {
   addEventListeners() {
@@ -12,7 +12,7 @@ class LoginPage extends Page {
       if ($id.value) {
         const userInfo = { username: "testuser", email: "", bio: "" };
         userStore.setUserState(userInfo);
-        navigateTo("/");
+        router.navigateTo("/");
       } else {
         alert("id를 입력해주세요")``;
       }
