@@ -3,7 +3,9 @@ import { userStorage } from "../storages";
 
 export const globalStore = createStore({
   currentUser: userStorage.get(),
-  loggedIn: Boolean(userStorage.get()),
+  get loggedIn() {
+    return Boolean(this.currentUser);
+  },
   posts: [
     {
       id: 1,
