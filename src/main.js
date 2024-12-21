@@ -5,23 +5,21 @@ import { ForbiddenError, UnauthorizedError } from "./errors";
 import { router } from "./router";
 import { render } from "./render";
 
+const AuthGuard = (validation, CustomError, Component) => {
+  return () => {
+    const { loggedIn } = globalStore.getState();
+    if (validation(loggedIn)) {
+      throw new CustomError();
+    }
+    return Component();
+  };
+};
+
 router.set(
   createRouter({
     "/": HomePage,
-    "/login": () => {
-      const { loggedIn } = globalStore.getState();
-      if (loggedIn) {
-        throw new ForbiddenError();
-      }
-      return LoginPage();
-    },
-    "/profile": () => {
-      const { loggedIn } = globalStore.getState();
-      if (!loggedIn) {
-        throw new UnauthorizedError();
-      }
-      return ProfilePage();
-    },
+    "/login": AuthGuard(Boolean, ForbiddenError, LoginPage),
+    "/profile": AuthGuard((value) => !value, UnauthorizedError, ProfilePage),
   }),
 );
 
